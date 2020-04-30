@@ -17,7 +17,8 @@
     "serve-static": "^1.11.1",
     "strip-bom": "^3.0.0",
     "uuid": "^3.1.0",
-    "xml-crypto": "^1.2.0"
+    "xml-crypto": "^1.2.0",
+    "snyk": "^1.316.1"
   },
   "repository": {
     "type": "git",
@@ -30,7 +31,7 @@
     "test": "./test"
   },
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "npm run snyk-protect && npm run build",
     "build": "tsc -p .",
     "clean": "rm -rf lib",
     "watch": "tsc -w -p .",
@@ -39,7 +40,8 @@
     "cover": "nyc --reporter=lcov --reporter=html --reporter=text mocha --timeout 15000 --exit test/*-test.js test/security/*.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v",
     "docs": "typedoc --out docs",
-    "test": "mocha --timeout 15000 --bail --exit test/*-test.js test/security/*.js"
+    "test": "mocha --timeout 15000 --bail --exit test/*-test.js test/security/*.js",
+    "snyk-protect": "snyk protect"
   },
   "keywords": [
     "soap"
@@ -75,5 +77,6 @@
     "tslint": "^5.13.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3333"
-  }
+  },
+  "snyk": true
 }
